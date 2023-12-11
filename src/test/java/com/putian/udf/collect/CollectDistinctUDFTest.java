@@ -1,4 +1,4 @@
-package brickhouse.udf.collect;
+package com.putian.udf.collect;
 
 import com.putian.udf.collect.CollectDistinctUDAF;
 import com.putian.udf.collect.CollectDistinctUDAF.SetCollectUDAFEvaluator;

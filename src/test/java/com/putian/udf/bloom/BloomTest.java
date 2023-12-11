@@ -1,4 +1,4 @@
-package brickhouse.udf.bloom;
+package com.putian.udf.bloom;
 
 import org.apache.hadoop.util.bloom.Filter;
 import org.apache.hadoop.util.bloom.Key;

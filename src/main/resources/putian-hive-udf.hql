@@ -81,15 +81,15 @@ CREATE TEMPORARY FUNCTION add_days AS 'com.putian.udf.date.AddDaysUDF';
 CREATE TEMPORARY FUNCTION date_range AS 'com.putian.udf.date.DateRangeUDTF';
 CREATE TEMPORARY FUNCTION add_iso_period AS 'com.putian.udf.date.AddISOPeriodUDF';
 
-CREATE TEMPORARY FUNCTION hbase_balanced_key AS 'brickhouse.hbase.GenerateBalancedKeyUDF';
-CREATE TEMPORARY FUNCTION hbase_batch_put AS 'brickhouse.hbase.BatchPutUDAF';
-CREATE TEMPORARY FUNCTION hbase_batch_get AS 'brickhouse.hbase.BatchGetUDF';
-CREATE TEMPORARY FUNCTION hbase_cached_get AS 'brickhouse.hbase.CachedGetUDF';
-CREATE TEMPORARY FUNCTION hbase_get AS 'brickhouse.hbase.GetUDF';
-CREATE TEMPORARY FUNCTION hbase_put AS 'brickhouse.hbase.PutUDF';
-CREATE TEMPORARY FUNCTION salted_bigint_key AS 'brickhouse.hbase.SaltedBigIntUDF';
+CREATE TEMPORARY FUNCTION hbase_balanced_key AS 'com.putian.hbase.GenerateBalancedKeyUDF';
+CREATE TEMPORARY FUNCTION hbase_batch_put AS 'com.putian.hbase.BatchPutUDAF';
+CREATE TEMPORARY FUNCTION hbase_batch_get AS 'com.putian.hbase.BatchGetUDF';
+CREATE TEMPORARY FUNCTION hbase_cached_get AS 'com.putian.hbase.CachedGetUDF';
+CREATE TEMPORARY FUNCTION hbase_get AS 'com.putian.hbase.GetUDF';
+CREATE TEMPORARY FUNCTION hbase_put AS 'com.putian.hbase.PutUDF';
+CREATE TEMPORARY FUNCTION salted_bigint_key AS 'com.putian.hbase.SaltedBigIntUDF';
 
-CREATE TEMPORARY FUNCTION salted_bigint AS 'brickhouse.hbase.SaltedBigIntUDF';
+CREATE TEMPORARY FUNCTION salted_bigint AS 'putian.hbase.SaltedBigIntUDF';
 
 
 CREATE TEMPORARY FUNCTION hyperloglog AS 'com.putian.udf.hll.HyperLogLogUDAF';

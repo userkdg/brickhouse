@@ -1,4 +1,4 @@
-package brickhouse.analytics.uniques;
+package com.putian.analytics.uniques;
 
 import com.putian.analytics.uniques.SketchSet;
 import com.putian.udf.sketch.SetSimilarityUDF;

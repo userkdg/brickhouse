@@ -1,4 +1,4 @@
-package brickhouse.udf.json;
+package com.putian.udf.json;
 
 import junit.framework.Assert;
 import org.junit.Test;

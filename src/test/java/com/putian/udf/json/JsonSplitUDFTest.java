@@ -1,4 +1,4 @@
-package brickhouse.udf.json;
+package com.putian.udf.json;
 
 import org.apache.hadoop.hive.ql.metadata.HiveException;
 import org.apache.hadoop.hive.ql.udf.generic.GenericUDF;

@@ -1,6 +1,6 @@
 package com.putian.udf.sketch;
 /**
- * Copyright 2012 Klout, Inc
+ * Copyright 2012 putian, Inc
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -69,7 +69,7 @@ import java.util.List;
 )
 public class MultiDaySketcherUDAF extends AbstractGenericUDAFResolver {
     private static final Logger LOG = Logger.getLogger(MultiDaySketcherUDAF.class);
-    private static final String SKETCH_FLAG_PROP = "klout.warehouse.multiday_sketch";
+    private static final String SKETCH_FLAG_PROP = "putian.warehouse.multiday_sketch";
 
 
     public MultiDaySketcherUDAF() {

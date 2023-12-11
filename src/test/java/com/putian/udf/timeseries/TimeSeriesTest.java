@@ -1,4 +1,4 @@
-package brickhouse.udf.timeseries;
+package com.putian.udf.timeseries;
 
 import com.putian.hbase.SaltedBigIntUDF;
 import junit.framework.Assert;

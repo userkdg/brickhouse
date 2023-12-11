@@ -1,7 +1,7 @@
 package com.putian.udf.timeseries;
 /**
 
- * Copyright 2012 Klout, Inc
+ * Copyright 2012 putian, Inc
 
  *
 

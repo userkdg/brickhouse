@@ -1,4 +1,4 @@
-package brickhouse.udf.date;
+package com.putian.udf.date;
 
 import junit.framework.Assert;
 

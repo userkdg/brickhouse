@@ -1,4 +1,4 @@
-package brickhouse.udf.collect;
+package com.putian.udf.collect;
 
 import org.apache.hadoop.hive.ql.exec.UDFArgumentException;
 import org.apache.hadoop.hive.ql.metadata.HiveException;
