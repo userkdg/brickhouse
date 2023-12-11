@@ -7,6 +7,7 @@ import org.apache.hadoop.hive.serde2.objectinspector.StandardListObjectInspector
 import org.apache.hadoop.hive.serde2.objectinspector.primitive.PrimitiveObjectInspectorFactory;
 import org.junit.Before;
 import org.junit.Test;
+import com.putian.udf.json.JsonSplitUDF;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;

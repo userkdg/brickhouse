@@ -4,6 +4,7 @@ import org.apache.hadoop.util.bloom.Filter;
 import org.apache.hadoop.util.bloom.Key;
 import org.junit.Assert;
 import org.junit.Test;
+import com.putian.udf.bloom.BloomFactory;
 
 import java.util.HashSet;
 import java.util.UUID;

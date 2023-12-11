@@ -14,6 +14,7 @@ import org.apache.hadoop.hive.serde2.objectinspector.primitive.PrimitiveObjectIn
 import org.apache.log4j.Logger;
 import org.junit.Ignore;
 import org.junit.Test;
+import com.putian.udf.hll.HyperLogLogUDAF;
 
 import java.io.IOException;
 import java.util.HashMap;

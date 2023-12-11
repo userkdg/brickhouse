@@ -2,6 +2,7 @@ package brickhouse.udf.json;
 
 import junit.framework.Assert;
 import org.junit.Test;
+import com.putian.udf.json.FromJsonUDF;
 
 public class JsonUDFTest {
 

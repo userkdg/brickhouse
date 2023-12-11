@@ -1,12 +1,14 @@
 package brickhouse.udf.timeseries;
 
-import brickhouse.hbase.SaltedBigIntUDF;
+import com.putian.hbase.SaltedBigIntUDF;
 import junit.framework.Assert;
 import org.apache.hadoop.hive.ql.exec.UDFArgumentException;
 import org.apache.hadoop.hive.serde2.objectinspector.ObjectInspector;
 import org.apache.hadoop.hive.serde2.objectinspector.ObjectInspectorFactory;
 import org.apache.hadoop.hive.serde2.objectinspector.primitive.PrimitiveObjectInspectorFactory;
 import org.junit.Test;
+import com.putian.udf.timeseries.MovingAvgUDF;
+import com.putian.udf.timeseries.MovingStdevUDF;
 
 import java.util.ArrayList;
 import java.util.Arrays;

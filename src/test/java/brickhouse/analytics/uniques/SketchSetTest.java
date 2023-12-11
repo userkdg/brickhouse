@@ -1,6 +1,7 @@
 package brickhouse.analytics.uniques;
 
-import brickhouse.udf.sketch.SetSimilarityUDF;
+import com.putian.analytics.uniques.SketchSet;
+import com.putian.udf.sketch.SetSimilarityUDF;
 import com.google.common.hash.HashFunction;
 import com.google.common.hash.Hashing;
 import org.junit.Assert;

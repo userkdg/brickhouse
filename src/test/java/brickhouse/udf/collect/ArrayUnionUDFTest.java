@@ -10,6 +10,7 @@ import org.apache.hadoop.hive.serde2.objectinspector.StandardListObjectInspector
 import org.apache.hadoop.hive.serde2.objectinspector.primitive.PrimitiveObjectInspectorFactory;
 import org.junit.Before;
 import org.junit.Test;
+import com.putian.udf.collect.ArrayUnionUDF;
 
 import java.util.ArrayList;
 import java.util.List;

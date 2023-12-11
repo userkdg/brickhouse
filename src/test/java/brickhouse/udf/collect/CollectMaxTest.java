@@ -1,8 +1,9 @@
 package brickhouse.udf.collect;
 
 
-import brickhouse.udf.collect.CollectMaxUDAF.MapCollectMaxUDAFEvaluator;
-import brickhouse.udf.collect.CollectMaxUDAF.MapCollectMaxUDAFEvaluator.MapAggBuffer;
+import com.putian.udf.collect.CollectMaxUDAF;
+import com.putian.udf.collect.CollectMaxUDAF.MapCollectMaxUDAFEvaluator;
+import com.putian.udf.collect.CollectMaxUDAF.MapCollectMaxUDAFEvaluator.MapAggBuffer;
 import junit.framework.Assert;
 import org.apache.hadoop.hive.ql.metadata.HiveException;
 import org.apache.hadoop.hive.ql.udf.generic.GenericUDAFEvaluator.Mode;
