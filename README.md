@@ -38,7 +38,7 @@ Getting Started
  3. Add the jar "target/brickhouse-\<version number\>.jar" to your HIVE_AUX_JARS_FILE_PATH,
     or add it to the distributed cache from the Hive CLI 
     with the "add jar" command
- 4. Source the UDF declarations defined in src/main/resource/brickhouse.hql
+ 4. Source the UDF declarations defined in src/main/resource/putian-hive-udf.hql
 
 See the wiki on Github at https://github.com/klout/brickhouse/wiki for more 
   information.
