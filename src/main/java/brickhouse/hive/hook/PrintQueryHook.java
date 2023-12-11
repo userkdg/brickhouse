@@ -11,13 +11,11 @@ import java.util.Set;
 
 public class PrintQueryHook implements PreExecute {
 
-    @Override
     public void run(SessionState session, Set<ReadEntity> reads,
                     Set<WriteEntity> writes, UserGroupInformation ugi) throws Exception {
         HiveHistory history = session.getHiveHistory();
 
-        session.out.println(" PreExecute Query " + session.getCmd());
+        session.out.println(" PreExecute Query " + session.getLastCommand());
 
     }
-
 }

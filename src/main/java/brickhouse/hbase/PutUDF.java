@@ -16,6 +16,7 @@ package brickhouse.hbase;
  *
  **/
 
+import org.apache.hadoop.hbase.CellUtil;
 import org.apache.hadoop.hbase.client.HTable;
 import org.apache.hadoop.hbase.client.Put;
 import org.apache.hadoop.hive.ql.exec.Description;
@@ -52,10 +53,9 @@ public class PutUDF extends UDF {
         try {
             HTable table = HTableFactory.getHTable(configMap);
             Put thePut = new Put(key.getBytes());
-            thePut.add(configMap.get(HTableFactory.FAMILY_TAG).getBytes(), configMap.get(HTableFactory.QUALIFIER_TAG).getBytes(), value.getBytes());
+            thePut.add(CellUtil.createCell(configMap.get(HTableFactory.FAMILY_TAG).getBytes(), configMap.get(HTableFactory.QUALIFIER_TAG).getBytes(), value.getBytes()));
 
             table.put(thePut);
-            table.flushCommits();
             return "Put " + key + ":" + value;
         } catch (Exception exc) {
             LOG.error("Error while doing HBase Puts");
@@ -70,15 +70,14 @@ public class PutUDF extends UDF {
             List<Put> putList = new ArrayList<Put>();
             for (Map.Entry<String, String> keyValue : keyValueMap.entrySet()) {
                 Put thePut = new Put(keyValue.getKey().getBytes());
-                thePut.add(configMap.get(HTableFactory.FAMILY_TAG).getBytes(),
+                thePut.add(CellUtil.createCell(configMap.get(HTableFactory.FAMILY_TAG).getBytes(),
                         configMap.get(HTableFactory.QUALIFIER_TAG).getBytes(),
-                        keyValue.getValue().getBytes());
+                        keyValue.getValue().getBytes()));
                 putList.add(thePut);
             }
 
             HTable table = HTableFactory.getHTable(configMap);
             table.put(putList);
-            table.flushCommits();
             return "Put " + keyValueMap.toString();
         } catch (Exception exc) {
             LOG.error("Error while doing HBase Puts");

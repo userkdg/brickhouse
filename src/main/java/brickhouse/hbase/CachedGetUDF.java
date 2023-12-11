@@ -5,6 +5,7 @@ import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.util.concurrent.UncheckedExecutionException;
+import org.apache.hadoop.hbase.Cell;
 import org.apache.hadoop.hbase.KeyValue;
 import org.apache.hadoop.hbase.client.Get;
 import org.apache.hadoop.hbase.client.HTable;
@@ -81,11 +82,11 @@ public class CachedGetUDF extends GenericUDF {
             Get keyGet = new Get(key.getBytes());
             HTable htable = HTableFactory.getHTable(configMap);
             Result res = htable.get(keyGet);
-            KeyValue kv = res.getColumnLatest(configMap.get(HTableFactory.FAMILY_TAG).getBytes(), configMap.get(HTableFactory.QUALIFIER_TAG).getBytes());
+            Cell kv = res.getColumnLatestCell(configMap.get(HTableFactory.FAMILY_TAG).getBytes(), configMap.get(HTableFactory.QUALIFIER_TAG).getBytes());
             if (kv == null) {
                 throw new NoSuchElementException("No value found for " + key);
             }
-            byte[] bytes = kv.getValue();
+            byte[] bytes = kv.getValueArray();
             String jsonStr = new String(bytes);
 
             return jsonStr;
@@ -102,7 +103,7 @@ public class CachedGetUDF extends GenericUDF {
         try {
             ++numCalls;
             Object l = cache.get(key, new Callable<Object>() {
-                @Override
+
                 public Object call() throws Exception {
                     ++numMisses;
                     return valueLoader.load(key);

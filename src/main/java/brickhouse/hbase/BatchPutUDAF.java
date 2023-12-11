@@ -16,6 +16,8 @@ package brickhouse.hbase;
  *
  **/
 
+import org.apache.hadoop.hbase.Cell;
+import org.apache.hadoop.hbase.CellUtil;
 import org.apache.hadoop.hbase.KeyValue;
 import org.apache.hadoop.hbase.client.HTable;
 import org.apache.hadoop.hbase.client.Put;
@@ -41,6 +43,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.NavigableMap;
 
 /**
  * Retrieve from HBase by doing bulk s from an aggregate function call.
@@ -77,8 +80,12 @@ public class BatchPutUDAF extends AbstractGenericUDAFResolver {
 
             public void addKeyValue(String key, String val) throws HiveException {
                 Put thePut = new Put(key.getBytes());
-                thePut.add(getFamily(), getQualifier(), val.getBytes());
-                thePut.setWriteToWAL(false);
+                try {
+                    thePut.add(CellUtil.createCell(getFamily(), getQualifier(), val.getBytes()));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                // thePut.setWriteToWAL(false);
                 putList.add(thePut);
             }
         }
@@ -207,8 +214,8 @@ public class BatchPutUDAF extends AbstractGenericUDAFResolver {
                 HTable htable = HTableFactory.getHTable(configMap);
 
                 htable.put(kvBuff.putList);
-                if (flushCommits)
-                    htable.flushCommits();
+//                if (flushCommits)
+//                    htable.flushCommits();
                 numPutRecords += kvBuff.putList.size();
                 if (kvBuff.putList.size() > 0)
                     LOG.info(" Doing Batch Put " + kvBuff.putList.size() + " records; Total put records = " + numPutRecords + " ; Start = " + (new String(kvBuff.putList.get(0).getRow())) + " ; End = " + (new String(kvBuff.putList.get(kvBuff.putList.size() - 1).getRow())));
@@ -303,10 +310,10 @@ public class BatchPutUDAF extends AbstractGenericUDAFResolver {
             for (Put thePut : myagg.putList) {
                 ArrayList<String> kvList = new ArrayList<String>();
                 kvList.add(new String(thePut.getRow()));
-                Map<byte[], List<KeyValue>> familyMap = thePut.getFamilyMap();
-                for (List<KeyValue> innerList : familyMap.values()) {
-                    for (KeyValue kv : innerList) {
-                        kvList.add(new String(kv.getValue()));
+                Map<byte[], List<Cell>> familyMap = thePut.getFamilyCellMap();
+                for (List<Cell> innerList : familyMap.values()) {
+                    for (Cell kv : innerList) {
+                        kvList.add(new String(kv.getValueArray()));
                     }
                 }
                 ret.add(kvList);

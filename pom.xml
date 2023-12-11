@@ -40,58 +40,14 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <apache.hadoop.version>0.20.2</apache.hadoop.version>
-        <apache.hbase.version>0.92.1</apache.hbase.version>
-        <apache.hive.version>0.10.0</apache.hive.version>
+        <apache.hadoop.version>2.7.5</apache.hadoop.version>
+        <apache.hbase.version>2.1.0</apache.hbase.version>
+        <apache.hive.version>2.1.1</apache.hive.version>
         <codehaus.jackson.version>1.8.8</codehaus.jackson.version>
     </properties>
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-site-plugin</artifactId>
-                <version>3.0</version>
-                <configuration>
-                    <reportPlugins>
-                        <plugin>
-                            <groupId>org.apache.maven.plugins</groupId>
-                            <artifactId>maven-project-info-reports-plugin</artifactId>
-                            <version>2.2</version>
-                            <configuration>
-                                <dependencyDetailsEnabled>true</dependencyDetailsEnabled>
-                                <dependencyLocationsEnabled>true</dependencyLocationsEnabled>
-                            </configuration>
-                        </plugin>
-                        <plugin>
-                            <groupId>org.apache.maven.plugins</groupId>
-                            <artifactId>maven-javadoc-plugin</artifactId>
-                            <version>2.7</version>
-                            <configuration>
-                               <additionalparam>-Xdoclint:none</additionalparam>
-                            </configuration>
-                        </plugin>
-                        <plugin>
-                            <groupId>org.apache.maven.plugins</groupId>
-                            <artifactId>maven-surefire-report-plugin</artifactId>
-                            <version>2.6</version>
-                        </plugin>
-                        <plugin>
-                            <groupId>org.apache.maven.plugins</groupId>
-                            <artifactId>maven-checkstyle-plugin</artifactId>
-                            <version>2.6</version>
-                        </plugin>
-                    </reportPlugins>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
-                </configuration>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -104,100 +60,41 @@
                     </archive>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <configuration>
-                  <additionalparam>-Xdoclint:none</additionalparam>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <!--
-        <plugin>
-           <groupId>org.apache.maven.plugins</groupId>
-           <artifactId>maven-gpg-plugin</artifactId>
-           <executions>
-             <execution>
-               <id>sign-artifacts</id>
-               <phase>verify</phase>
-               <goals>
-                 <goal>sign</goal>
-               </goals>
-             </execution>
-           </executions>
-         </plugin>
-         -->
         </plugins>
     </build>
-
-    <reporting>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>2.10</version>
-                <configuration>
-                    <configLocation>maven_checks.xml</configLocation>
-                </configuration>
-            </plugin>
-        </plugins>
-    </reporting>
 
     <dependencies>
 
         <!-- Hive -->
         <dependency>
             <groupId>org.apache.hive</groupId>
-            <artifactId>hive-serde</artifactId>
-            <optional>true</optional>
-            <version>${apache.hive.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.hive</groupId>
-            <artifactId>hive-common</artifactId>
-            <version>${apache.hive.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.hive</groupId>
             <artifactId>hive-exec</artifactId>
             <version>${apache.hive.version}</version>
+            <scope>provided</scope>
             <exclusions>
                 <exclusion>
                     <groupId>javax.jdo</groupId>
                     <artifactId>jdo2-api</artifactId>
                 </exclusion>
+                <exclusion>
+                    <artifactId>pentaho-aggdesigner-algorithm</artifactId>
+                    <groupId>org.pentaho</groupId>
+                </exclusion>
             </exclusions>
         </dependency>
 
-        <dependency>
-            <groupId>org.apache.hadoop</groupId>
-            <artifactId>hadoop-core</artifactId>
-            <version>${apache.hadoop.version}</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.apache.hadoop</groupId>-->
+<!--            <artifactId>hadoop-core</artifactId>-->
+<!--            <version>${apache.hadoop.version}</version>-->
+<!--            <scope>provided</scope>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>org.apache.hbase</groupId>
-            <artifactId>hbase</artifactId>
+            <artifactId>hbase-client</artifactId>
             <version>${apache.hbase.version}</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
@@ -256,30 +153,5 @@
 
 
     </dependencies>
-
-    <!--
-       <distributionManagement>
-         <repository>
-           <id>sonatype-nexus-staging</id>
-            <name>Nexus Staging Repository</name>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-         </repository>
-     </distributionManagement>
-     -->
-
-
-    <distributionManagement>
-        <repository>
-            <id>central</id>
-            <name>maven-repo-releases</name>
-            <url>http://maven.klout:8081/artifactory/libs-release-local</url>
-        </repository>
-        <snapshotRepository>
-            <id>snapshots</id>
-            <name>maven-repo-snapshots</name>
-            <url>http://maven.klout:8081/artifactory/libs-snapshot-local</url>
-        </snapshotRepository>
-    </distributionManagement>
-
 
 </project>

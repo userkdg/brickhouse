@@ -2,7 +2,10 @@ package brickhouse.hbase;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
+import org.apache.hadoop.hbase.TableName;
+import org.apache.hadoop.hbase.client.ConnectionFactory;
 import org.apache.hadoop.hbase.client.HTable;
+import org.apache.hadoop.hbase.client.Table;
 import org.apache.hadoop.hive.ql.exec.UDFArgumentException;
 import org.apache.hadoop.hive.serde2.objectinspector.ObjectInspector;
 import org.apache.hadoop.hive.serde2.objectinspector.ObjectInspectorUtils;
@@ -46,12 +49,9 @@ public class HTableFactory {
                 hbConfig = HBaseConfiguration.create(config);
             }
 
-            table = new HTable(hbConfig, tableName);
+            table = (HTable) ConnectionFactory.createConnection(hbConfig).getTable(TableName.valueOf(tableName));
+//            table = new HTable(hbConfig, tableName);
 
-            if (configMap.containsKey(AUTOFLUSH_TAG)) {
-                Boolean flushFlag = Boolean.valueOf(configMap.get(AUTOFLUSH_TAG));
-                table.setAutoFlush(flushFlag);
-            }
 
             htableMap.put(tableName, table);
         }
